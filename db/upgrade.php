@@ -50,12 +50,8 @@ require_once($CFG->dirroot . '/mod/scormcloud/lib.php');
  */
 function xmldb_scormcloud_upgrade($oldversion) {
     global $DB;
-    global $CFG;
 
     $dbman = $DB->get_manager();
-
-    $module = new stdClass();
-    require($CFG->dirroot . '/mod/scormcloud/version.php');
 
     $result = true;
 
@@ -77,9 +73,9 @@ function xmldb_scormcloud_upgrade($oldversion) {
 
         $field->setNotNull();
         $dbman->change_field_notnull($table, $field);
-    }
 
-    upgrade_mod_savepoint($result, $module->version, 'scormcloud');
+        upgrade_mod_savepoint($result, 2011100700, 'scormcloud');
+    }
 
     return $result;
 }
